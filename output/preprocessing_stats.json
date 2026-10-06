@@ -1,0 +1,17 @@
+{
+  "source_file": "data/骆驼祥子.txt",
+  "source_sha256": "0e89a8dffdfc5811ece1987de8e7992dc115eec538507ec79d398a6cdf80188c",
+  "removed_prefix_characters": 89,
+  "removed_chapter_lines": 46,
+  "removed_end_lines": 1,
+  "simplified_characters_including_whitespace": 135315,
+  "simplified_characters_without_whitespace": 134344,
+  "split_sentences": 5066,
+  "retained_sentences": 4427,
+  "discarded_short_sentences": 639,
+  "retained_tokens": 72970,
+  "target_word": "祥子",
+  "target_strings_before_short_sentence_filter": 801,
+  "retained_target_tokens": 736,
+  "sentences_sha256": "a715ddb9b5e67fd933d96803a632156643792cdef1f087f5c06847655224a0bf"
+}

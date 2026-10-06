@@ -1,0 +1,43 @@
+{
+  "target_word": "祥子",
+  "sentence_count": 4427,
+  "token_count": 72970,
+  "target_token_count": 736,
+  "sentences_sha256": "a715ddb9b5e67fd933d96803a632156643792cdef1f087f5c06847655224a0bf",
+  "alternative": "greater",
+  "correction": null,
+  "min_word_length": 2,
+  "max_p": 0.05,
+  "strict_p_less_than_threshold": true,
+  "stopword_language": "zh_sim",
+  "stopword_count": 806,
+  "sort_by": "obs_local",
+  "ascending": false,
+  "max_sentence_length": null,
+  "qhchina_version": "0.2.7",
+  "runs": [
+    {
+      "name": "window5",
+      "method": "window",
+      "horizon": 5,
+      "csv": "collocates_xiangzi_window5.csv",
+      "rows": 94,
+      "csv_sha256": "e1fec11be649088c7f48122bdfefa57043d06780679af6ef07a3344a2631d955"
+    },
+    {
+      "name": "window10",
+      "method": "window",
+      "horizon": 10,
+      "csv": "collocates_xiangzi_window10.csv",
+      "rows": 110,
+      "csv_sha256": "09176a6342d950f3e620d1d6016b56dccb09fcae99df546ce82f22002e897691"
+    },
+    {
+      "name": "sentence",
+      "method": "sentence",
+      "csv": "collocates_xiangzi_sentence.csv",
+      "rows": 114,
+      "csv_sha256": "26192fdb61390fe504d042d3dedceb841c84ca3703dbe7830778cfbea268e2ab"
+    }
+  ]
+}
