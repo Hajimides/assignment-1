@@ -20,6 +20,8 @@ segment.py                      清理、繁简转换、分句和分词
 sentences.txt                   每行一个句子，词之间以空格分隔
 collocates.py                   三组搭配词分析
 make_report.py                  汇总 CSV，生成结果比较网页
+report.md / report.pdf          短文报告（两者内容一致）
+compare_runs.py                 比较三组结果的异同，补查不显著的重点人物
 requirements.txt                当前运行环境的依赖版本
 output/
   collocates_xiangzi_window5.csv
@@ -28,6 +30,8 @@ output/
   preprocessing_stats.json      语料处理规模和输入哈希
   analysis_settings.json        分析参数、结果行数和文件哈希
   results.html                  可离线打开的结果比较网页
+  run_comparison.csv            三组显著模式对照表（由 compare_runs.py 生成）
+  unfiltered_check.csv          不过滤停用词与单字词的补查（由 compare_runs.py 生成）
 ```
 
 `make_report.py` 生成的是统计结果网页。作业的短文报告须另存为 `report.md` 和 `report.pdf`，两者内容一致。
@@ -43,9 +47,10 @@ python -m pip install -r requirements.txt
 python segment.py
 python collocates.py
 python make_report.py
+python compare_runs.py
 ```
 
-每次重跑会更新相应生成文件。修改语料或分词规则后，应按上述顺序重跑三个脚本。`make_report.py` 会核对输入和 CSV 的哈希，避免混用不同次分析的文件。
+每次重跑会更新相应生成文件。修改语料或分词规则后，应按上述顺序重跑全部脚本。`make_report.py` 会核对输入和 CSV 的哈希，避免混用不同次分析的文件。
 
 直接用浏览器打开 `output/results.html` 即可查看。页面不依赖网络资源，支持三组表格切换、词语搜索、按列排序、前 20 项 / 全部结果切换和 CSV 下载。
 
@@ -102,6 +107,12 @@ python -m http.server 8000 --bind 127.0.0.1
 
 `horizon=5` 表示左右各 5 个分词后的词，窗口限定在句子内。句子模式把同一句作为共现单位，同一句中重复出现不会增加该句的计数。因此，两种模式的频数单位不同。
 
+## 三组结果比较
+
+`compare_runs.py` 用与 `collocates.py` 相同的设置重跑三组分析，但不设 `max_p`，以便查看不显著词的 p 值；显著与否仍按 `p < 0.05` 判断，并先核对重跑的显著词与已保存的 CSV 完全一致。输出 `output/run_comparison.csv`，列出任一组显著的词及若干重点人物（含三组都不显著的“四爷”），按“三组共有”“仅窗口模式显著”“窗口 5 不显著，范围扩大后显著”“仅句子模式显著”等模式分组。窗口模式与句子模式的 `obs` 单位不同，只能比较是否显著，不能直接比较次数。
+
+脚本另做一次补查：不过滤停用词、允许单字词，只取“说”“他”“车”“钱”“买车”“拉车”六个词，结果写入 `output/unfiltered_check.csv`。“说”“他”是停用词，“车”“钱”是单字词，正式结果中不会出现；这些数字只用于解释（例如小说的核心主题是否异常集中在“祥子”周围），不属于正式的搭配词结果。
+
 ## 结果列
 
 | 列名 | 含义 |
@@ -118,4 +129,4 @@ python -m http.server 8000 --bind 127.0.0.1
 
 ## 提交状态
 
-数据、脚本、三份 CSV、比较网页及运行说明已经准备好。完整作业还需要自行完成 `report.md` 与 `report.pdf`，把两份报告提交到仓库，并在 Moodle 提交公开仓库网址及同一份 PDF。
+数据、脚本、三份 CSV、比较网页、三组结果对照（`compare_runs.py`）及短文报告 `report.md` / `report.pdf`（内容一致）均已提交。
